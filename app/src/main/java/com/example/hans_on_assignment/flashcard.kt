@@ -1,11 +1,12 @@
-package com.example.flashcards.data
+package com.example.hans_on_assignment.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "flashcards")
 data class Flashcard(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val question: String,
     val answer: String,
     val category: String

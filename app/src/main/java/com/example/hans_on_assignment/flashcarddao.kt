@@ -1,9 +1,8 @@
-package com.example.flashcards.data
+package com.example.hans_on_assignment.data
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FlashcardDao {
@@ -12,13 +11,11 @@ interface FlashcardDao {
     suspend fun insert(flashcard: Flashcard)
 
     @Query("SELECT DISTINCT category FROM flashcards ORDER BY category")
-    fun getDistinctCategories(): Flow<List<String>>
+    suspend fun getDistinctCategories(): List<String>
 
-    @Query("""
-        SELECT * FROM flashcards
-        WHERE category = :category
-        ORDER BY RANDOM()
-        LIMIT 1
-    """)
-    suspend fun getRandomByCategory(category: String): Flashcard?
+    @Query("SELECT * FROM flashcards WHERE category = :category")
+    suspend fun getByCategory(category: String): List<Flashcard>
+    @Query("DELETE FROM flashcards")
+    suspend fun deleteAll()
+
 }
